@@ -1,0 +1,25 @@
+name: Acceptance
+
+on:
+  push:
+    branches: ['main', 'req/**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run business acceptance
+        run: python -B -m unittest discover -s . -p 'test_*.py' -v
