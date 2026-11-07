@@ -19,7 +19,7 @@ def query_items(items, q=None, page=1, page_size=10):
         for item in items
         if query is None or query in item.get("name", "").casefold()
     ]
-    start = (page - 1) * page_size
+    start = page * page_size
 
     return {
         "items": filtered[start : start + page_size],
