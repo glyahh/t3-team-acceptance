@@ -1,5 +1,7 @@
+"""按名称过滤并分页返回内存库存条目。"""
+
+
 def query_items(items, q=None, page=1, page_size=10):
-    """按名称过滤并分页返回库存条目。"""
     if not isinstance(page, int) or isinstance(page, bool) or page < 1:
         raise ValueError("page must be an integer of at least 1")
     if (

@@ -2,12 +2,15 @@
 
 
 def render_page(result):
-    """验证查询结果，并返回条目文本及分页信息。"""
     if not isinstance(result, dict) or not isinstance(result.get("items"), list):
         raise ValueError("result must be a dictionary with an items list")
 
     items = result["items"]
-    names = [str(item["name"]) for item in items if isinstance(item, dict) and "name" in item]
+    names = [
+        str(item["name"])
+        for item in items
+        if isinstance(item, dict) and "name" in item
+    ]
     return {
         "text": "\n".join(names),
         "page": result.get("page"),
